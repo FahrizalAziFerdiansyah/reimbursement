@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->date('date');
             $table->string('file');
-            $table->foreignId('approval_by')->references('id')->on('users');
+            $table->foreignId('approval_by')->nullable()->references('id')->on('users');
             $table->integer('status')->default(1)->comment('0:ditolak 1:pending 2:disetujui');
             $table->timestamps();
         });
