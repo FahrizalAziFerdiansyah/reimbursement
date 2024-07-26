@@ -6,6 +6,7 @@ use App\Helpers\FileHelper;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 
@@ -66,7 +67,8 @@ class SubmissionController extends Controller
             'date' => $request->date,
         ]);
         DB::commit();
-
+        Session::flash('message', ' Pengajuan detail berhasil di buat');
+        Session::flash('alert-class', 'alert-success');
         return redirect()->route('submission.index');
     }
 

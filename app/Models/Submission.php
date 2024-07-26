@@ -53,4 +53,14 @@ class Submission extends Model
                 break;
         }
     }
+    public function scopePending($query)
+    {
+        $user = auth()->user();
+        $role = $user->roles[0]->name;
+
+        if ($role == 'employee') {
+            $query = $query->where('user_id', $user->id);
+        }
+        return $query->where('status', 1);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -58,6 +59,8 @@ class UserController extends Controller
         $key = array_search($request->position, $this->position);
         $user->assignRole($this->roles[$key]);
         DB::commit();
+        Session::flash('message', ' User detail berhasil di buat');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->route('user.index');
     }
@@ -78,11 +81,22 @@ class UserController extends Controller
         $tmp->assignRole($this->roles[$key]);
         DB::commit();
 
+        Session::flash('message', ' User detail berhasil di ubah');
+        Session::flash('alert-class', 'alert-success');
+
         return redirect()->route('user.index');
     }
 
     public function show(User $user)
     {
         return view('pages.user.show', compact('user'));
+    }
+
+    public function delete(User $user)
+    {
+        $user->delete();
+        Session::flash('message', ' User detail berhasil di hapus');
+        Session::flash('alert-class', 'alert-success');
+        return redirect()->route('user.index');
     }
 }

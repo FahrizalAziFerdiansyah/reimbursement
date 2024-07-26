@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-4 label fw-bold mb-1">Image</div>
                     <div class="col-lg-9 col-md-8">
-                        <img style="width: 30%" src="{{ asset($submission?->file) }}" />
+                        <a target="_blank" href="{{ asset($submission?->file) }}">{{ $submission?->file }}</a>
                     </div>
                 </div>
             </div>

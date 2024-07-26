@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('pages.auth.login');
-// });
+Route::get('/', function () {
+    return view('pages.auth.login');
+});
 Route::prefix('/login')->name('login.')->group(function () {
     Route::get('/', [LoginController::class, 'index'])->name('index');
     Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
@@ -42,5 +42,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create/{user:nip?}', [UserController::class, 'create'])->name('create');
         Route::post('/store', [UserController::class, 'store'])->name('store');
         Route::get('/show/{user:nip?}', [UserController::class, 'show'])->name('show');
+        Route::get('/delete/{user:nip?}', [UserController::class, 'delete'])->name('delete');
     });
 });
